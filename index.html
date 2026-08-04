@@ -319,6 +319,58 @@
     margin-bottom:6px;
   }
   .stat span{font-size:14px; color:var(--ink-faint);}
+  /* ---------- JOURNEY DIVIDER ---------- */
+  .journey-divider{
+    padding:60px 0 8px;
+    text-align:center;
+  }
+  .journey-divider svg{
+    width:100%;
+    height:90px;
+    display:block;
+    overflow:visible;
+  }
+  .journey-path{
+    fill:none;
+    stroke:var(--accent);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:2600;
+    stroke-dashoffset:2600;
+    transition:stroke-dashoffset 2s ease;
+  }
+  .journey-divider.in .journey-path{
+    stroke-dashoffset:0;
+  }
+  .journey-dot{
+    fill:var(--accent);
+    opacity:0;
+    transition:opacity .4s ease 1.8s;
+  }
+  .journey-divider.in .journey-dot{opacity:1;}
+  .journey-pulse{
+    fill:none;
+    stroke:var(--accent);
+    stroke-width:2;
+    opacity:0;
+  }
+  .journey-divider.in .journey-pulse{
+    animation:journeyPulse 2.4s ease-out 1.9s infinite;
+  }
+  @keyframes journeyPulse{
+    0%{ r:3; opacity:.6; }
+    80%,100%{ r:18; opacity:0; }
+  }
+  .journey-caption{
+    margin-top:14px;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .journey-caption em{font-style:normal; color:var(--accent);}
 
   /* ---------- FOCUS CARDS ---------- */
   .focus-grid{
@@ -562,6 +614,8 @@
       font-size:15px;
     }
     section{padding:80px 0;}
+    .journey-divider{padding:36px 0 4px;}
+    .journey-divider svg{height:64px;}
     .hero-grid{grid-template-columns:1fr; gap:36px;}
     .hero-photo-wrap{max-width:200px; margin-left:0; order:-1;}
     .about-grid{grid-template-columns:1fr; gap:40px;}
@@ -642,7 +696,16 @@
     </div>
   </div>
 </section>
-
+<div class="wrap">
+  <div class="journey-divider reveal">
+    <svg viewBox="0 0 1000 170" preserveAspectRatio="none" role="img" aria-label="A line transitioning from a heartbeat pulse into an ascending growth chart">
+      <path class="journey-path" d="M0,100 L40,100 L55,80 L70,100 L95,100 L105,140 L115,20 L125,150 L135,100 L160,100 L172,85 L184,100 L210,100 L230,100 L245,80 L260,100 L285,100 L295,140 L305,20 L315,150 L325,100 L350,100 L362,85 L374,100 L400,100 L430,95 L465,102 L500,78 L535,85 L570,55 L605,65 L640,35 L675,45 L710,15 L745,25 L780,10 L850,8 L930,15" />
+      <circle class="journey-pulse" cx="930" cy="15" r="3" />
+      <circle class="journey-dot" cx="930" cy="15" r="4" />
+    </svg>
+    <p class="journey-caption">From bedside care to <em>financial strategy</em></p>
+  </div>
+</div>
 <section id="focus">
   <div class="wrap">
     <div class="reveal">
