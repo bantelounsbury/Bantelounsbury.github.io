@@ -467,12 +467,46 @@
     border-color:var(--accent);
   }
   .work-visual{
+.work-visual{
     width:100%;
     height:auto;
     display:block;
     border-radius:4px;
     border:1px solid var(--line);
     margin-bottom:24px;
+    cursor:zoom-in;
+    transition:opacity .2s ease;
+  }
+  .work-visual:hover{opacity:.9;}
+  .lightbox-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(27,36,31,0.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding:32px;
+    cursor:zoom-out;
+  }
+  .lightbox-overlay.open{display:flex;}
+  .lightbox-overlay img{
+    max-width:100%;
+    max-height:100%;
+    border-radius:4px;
+    display:block;
+  }
+  .lightbox-close{
+    position:fixed;
+    top:20px;
+    right:24px;
+    color:var(--bg);
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    z-index:1001;
+  }
   }
   .work-tag{
     font-size:12px;
@@ -902,6 +936,10 @@
   <span>Bante Lounsbury — Pittsburgh, PA</span>
   <span>Built for healthcare leadership.</span>
 </footer>
+  <div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close">Close ✕</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <script>
   const revealEls = document.querySelectorAll('.reveal');
@@ -949,6 +987,21 @@
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   trackedSections.forEach(s => navObserver.observe(s));
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.work-visual').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') lightbox.classList.remove('open');
+  });
 </script>
 
 </body>
